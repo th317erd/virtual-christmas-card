@@ -1,0 +1,24 @@
+{
+  "name": "virtual-christmas-card",
+  "version": "1.0.0",
+  "description": "Virtual Christmas Card",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/th317erd/virtual-christmas-card.git"
+  },
+  "author": "Wyatt Greenway",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/th317erd/virtual-christmas-card/issues"
+  },
+  "homepage": "https://github.com/th317erd/virtual-christmas-card#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
