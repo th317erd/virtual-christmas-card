@@ -2,9 +2,10 @@
   "name": "virtual-christmas-card",
   "version": "1.0.0",
   "description": "Virtual Christmas Card",
-  "main": "app/index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --display-error-details --inline --config=./config/webpack.config.dev.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/th317erd/virtual-christmas-card#readme",
   "devDependencies": {
+    "circular-dependency-plugin": "^5.2.0",
+    "terser-webpack-plugin": "^2.2.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
