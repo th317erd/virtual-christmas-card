@@ -185,6 +185,7 @@ body #overlay span {
   font-size: 30px;
   text-shadow: #222F 3px 3px 14px;
   color: white;
+  text-align: center;
 }
 
 body #overlay span:nth-child(1) {

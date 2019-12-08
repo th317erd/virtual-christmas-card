@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="/css/main.css">
 
     <script>
+      function onSubmit(event) {
+        if (event.code === 'Enter' || event.key === 'Enter' || event.charCode === 13)
+          updateName();
+      }
+
       function clearError() {
         document.getElementById('form').classList.remove('error');
       }
@@ -51,13 +56,14 @@
       <br>
       <br>
       <span>❦ With love and well wishes ❦</span>
+      <span>~ Wyatt, Jessica, Aeolus, and Orin ~</span>
     </div>
 
     <div id="form">
       <span>What is your name?</span>
       <br>
       <span class="error">Please input your name</span>
-      <input id="name" type="text" placeholder="Name" name="name" onfocus="clearError()" onchange="clearError()">
+      <input id="name" type="text" placeholder="Name" name="name" onfocus="clearError()" onchange="clearError()" onkeypress="onSubmit(event)">
       <br>
       <button onclick="updateName()">Continue</button>
     </div>
