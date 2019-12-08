@@ -60,7 +60,8 @@ class App {
     var deltaMS = (!this._lastRenderTime) ? 1 : time - this._lastRenderTime;
     this._lastRenderTime = time;
 
-    this._storm.update(deltaMS);
+    if (!global.pauseAnimations)
+      this._storm.update(deltaMS / 1000);
 
     window.requestAnimationFrame(this._renderFunc);
   }

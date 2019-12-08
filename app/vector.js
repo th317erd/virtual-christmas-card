@@ -98,6 +98,11 @@ class Vector {
     return vMag(this._axes);
   }
 
+  mag2() {
+    var axes = this._axes;
+    return ((axes[0] * axes[0]) + (axes[1] * axes[1]) + (axes[2] * axes[2]));
+  }
+
   dot() {
     return vDot(this._axes, this._coerceVectorData(axes, false));
   }

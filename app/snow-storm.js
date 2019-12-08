@@ -2,7 +2,26 @@ var Vector    = require('./vector'),
     SnowFlake = require('./snow-flake'),
     utils     = require('./utils');
 
-var DEFAULT_FLAKE_COUNT = 100;
+var DEFAULT_FLAKE_COUNT   = 100,
+    WIND_SCALAR           = 0.05,
+    WIND_ROTATION_SCALAR  = 0.0005,
+    WIND_LIMIT            = 0.005;
+
+function randomWind() {
+  return [
+    utils.random(WIND_SCALAR),
+    utils.random(WIND_SCALAR),
+    utils.random(WIND_SCALAR)
+  ];
+}
+
+function randomWindRotation() {
+  return [
+    utils.random(WIND_ROTATION_SCALAR),
+    (Math.random() * WIND_ROTATION_SCALAR) * 0.5,
+    utils.random(WIND_ROTATION_SCALAR) * 0.25
+  ];
+}
 
 class SnowStorm {
   constructor(parentElement, _flakeCount) {
@@ -46,6 +65,18 @@ class SnowStorm {
         enumerable: false,
         configurable: true,
         value: velocityScalar
+      },
+      _wind: {
+        writable: true,
+        enumerable: false,
+        configurable: true,
+        value: new Vector(randomWind())
+      },
+      _windRotation: {
+        writable: true,
+        enumerable: false,
+        configurable: true,
+        value: new Vector(randomWindRotation())
       }
     });
 
@@ -108,12 +139,7 @@ class SnowStorm {
         parentElement = (_parentElement) ? _parentElement : this.getElement();
 
     for (var i = 0; i < count; i++) {
-      var flake = flakes[i] = new SnowFlake(
-        parentElement,
-        utils.randomFlakePosition(),
-        utils.randomFlakeVelocity()
-      );
-
+      var flake = flakes[i] = new SnowFlake({ parentElement });
       lookupTable[flake.id] = flake;
     }
 
@@ -131,10 +157,41 @@ class SnowStorm {
   }
 
   update(deltaMS) {
-    var flakes = this._flakes;
+    function snowFlakeEnvironmentUpdate(snowflake) {
+      snowflake.position.add(self._wind);
+      //snowflake.rotation.add(this._wind);
+    }
+
+    var self = this,
+        flakes = this._flakes,
+        randomJitter = 0.01;
+
+    this._wind.add([
+      this._windRotation.x * deltaMS,
+      this._windRotation.y * deltaMS,
+      this._windRotation.y * deltaMS
+    ]);
+
+    if (this._wind.mag() > WIND_LIMIT) {
+      this._wind.normalize();
+      this._wind.mul(WIND_LIMIT);
+    }
+
+    if (this._wind.y < 0)
+      this._wind.y = 0;
+
+    //console.log(this._wind.mag2());
+
+    if (Math.random() < 0.25)
+      this._windRotation.set(randomWindRotation());
+
     for (var i = 0, il = flakes.length; i < il; i++) {
       var flake = flakes[i];
-      flake.update(deltaMS);
+      flake.update(
+        deltaMS,
+        ((Math.random() * randomJitter) - (randomJitter * 0.5)) + 1,
+        snowFlakeEnvironmentUpdate
+      );
     }
   }
 }

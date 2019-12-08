@@ -4,6 +4,7 @@ html,body {
   position: relative;
   font-size: 10px;
   overflow: hidden;
+  background-color: black;
 }
 
 html,body,body * {
@@ -12,13 +13,54 @@ html,body,body * {
   border: 0;
 }
 
+body #background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+body #background #video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+body #background #backdrop {
+  position: absolute;
+  top: 45vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-image: url('/images/background.png');
+  background-position: center bottom;
+  background-repeat: no-repeat no-repeat;
+  background-size: 100% 55vh;
+}
+
+body #root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+
 #root .snowstorm {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: 2;
   overflow: hidden;
 }
 
@@ -26,7 +68,34 @@ html,body,body * {
   position: absolute;
   top: 0;
   left: 0;
-  width: 2px;
-  height: 2px;
-  background-color: black;
+  width: 30px;
+  height: 30px;
+  background-clip: content-box;
+  background-position: center center;
+  background-size: contain;
+  filter: invert();
+}
+
+#root .snowflake[type="1"] {
+  background-image: url('/images/snow-flake-01.svg');
+}
+
+#root .snowflake[type="2"] {
+  background-image: url('/images/snow-flake-02.svg');
+}
+
+#root .snowflake[type="3"] {
+  background-image: url('/images/snow-flake-03.svg');
+}
+
+#root .snowflake[type="4"] {
+  background-image: url('/images/snow-flake-04.svg');
+}
+
+#root .snowflake[type="5"] {
+  background-image: url('/images/snow-flake-05.svg');
+}
+
+#root .snowflake[type="6"] {
+  background-image: url('/images/snow-flake-06.svg');
 }

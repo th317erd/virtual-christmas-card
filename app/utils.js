@@ -1,11 +1,14 @@
 var uuidCounter = 1;
 
-var VELOCITY_SCALAR   = 0.0001,
-    VELOCITY_X_SCALAR = 0.5,
-    VELOCITY_Z_SCALAR = 0.25,
-    VELOCITY_AXIS_MIN = 0.00005,
-    VELOCITY_AXIS_MAX = 0.01;
-
+var VELOCITY_SCALAR     = 1,
+    VELOCITY_X_SCALAR   = 0.1,
+    VELOCITY_Y_SCALAR   = 3,
+    VELOCITY_Z_SCALAR   = 0.1,
+    VELOCITY_AXIS_MIN   = 0.0005,
+    VELOCITY_AXIS_MAX   = 0.5,
+    SNOW_FLAKE_SIZE     = 30,
+    SNOW_FLAKE_START_X  = 1,
+    SNOW_FLAKE_START_Y  = (SNOW_FLAKE_SIZE / window.innerHeight);
 
 function genID(prefix) {
   return [ prefix || 'uuid', uuidCounter++ ].join('-');
@@ -18,7 +21,6 @@ function createElement(root, attributes) {
   for (var i = 0, il = attributeNames.length; i < il; i++) {
     var attributeName   = attributeNames[i],
         attributeValue  = attributes[attributeName];
-
     element.setAttribute(attributeName, attributeValue);
   }
 
@@ -41,9 +43,9 @@ function positive(value) {
 
 function randomFlakePosition(resetY) {
   return [
-    Math.random(),
-    (resetY) ? 0 : Math.random(),
-    random() * 0.5
+    (Math.random() * (SNOW_FLAKE_START_X * 3)) - (SNOW_FLAKE_START_X * 1.5),
+    (resetY) ? -SNOW_FLAKE_START_Y : Math.random(),
+    random()
   ];
 }
 
@@ -64,17 +66,38 @@ function velocityBounds(velocityAxis) {
 function randomFlakeVelocity() {
   return [
     velocityBounds(random(VELOCITY_SCALAR) * VELOCITY_X_SCALAR),
-    velocityBounds(positive(random(VELOCITY_SCALAR))),
-    velocityBounds(random(VELOCITY_SCALAR) * VELOCITY_Z_SCALAR)
+    velocityBounds(positive(random(VELOCITY_SCALAR)) * VELOCITY_Y_SCALAR),
+    velocityBounds(random(VELOCITY_SCALAR) * VELOCITY_Z_SCALAR) * 0.5
+  ];
+}
+
+function randomFlakeRotation() {
+  return [
+    random(),
+    random(),
+    random()
+  ];
+}
+
+function randomFlakeRotationVelocity() {
+  return [
+    random(VELOCITY_SCALAR * 4),
+    random(VELOCITY_SCALAR * 4),
+    random(VELOCITY_SCALAR * 4)
   ];
 }
 
 module.exports = {
+  SNOW_FLAKE_SIZE,
+  SNOW_FLAKE_START_X,
+  SNOW_FLAKE_START_Y,
   genID,
   createElement,
   removeElement,
   random,
   positive,
   randomFlakePosition,
-  randomFlakeVelocity
+  randomFlakeVelocity,
+  randomFlakeRotation,
+  randomFlakeRotationVelocity
 };
