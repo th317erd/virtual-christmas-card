@@ -12,7 +12,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     publicPath: 'javascript',
-    path: Path.resolve(__dirname, 'public/javascript'),
+    path: Path.join(ENV.APP_ROOT_PATH, 'public', 'javascript'),
   },
   target: 'web',
   resolve: {
