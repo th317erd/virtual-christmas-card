@@ -99,3 +99,94 @@ body #root {
 #root .snowflake[type="6"] {
   background-image: url('/images/snow-flake-06.svg');
 }
+
+body #form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body #form span {
+  color: #222;
+  font-size: 60px;
+  margin-bottom: 40px;
+  text-shadow: #2227 3px 3px 7px;
+}
+
+body #form input {
+  font-size: 40px;
+  border: 1px solid #999;
+  margin-bottom: 40px;
+  box-shadow: #2227 3px 3px 14px 2px;
+  padding: 5px;
+}
+
+body #form.error input {
+  color: red;
+}
+
+body #form.error input::placeholder {
+  color: red;
+}
+
+body #form span.error {
+  display: none;
+  color: red;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+body #form.error span.error {
+  display: inline;
+}
+
+body #form button {
+  font-size: 40px;
+  background-color: #9fbdf9;
+  padding: 12px 40px 12px 40px;
+  border: 2px solid #88a9ea;
+  border-radius: 15px;
+  color: white;
+  text-shadow: #2227 3px 3px 7px;
+  cursor: pointer;
+}
+
+body.ready #form {
+  display: none !important;
+}
+
+body:not(.ready) #overlay {
+  display: none !important;
+}
+
+body #overlay {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body #overlay span {
+  font-size: 30px;
+  text-shadow: #222F 3px 3px 14px;
+  color: white;
+}
+
+body #overlay span:nth-child(1) {
+  font-size: 60px;
+}
