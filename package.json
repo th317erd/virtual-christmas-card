@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --display-error-details --inline --config=./config/webpack.config.dev.js",
-    "build": "NODE_ENV=development ./node_modules/.bin/webpack --progress --profile --colors --display-error-details --config=./config/webpack.config.prod.js"
+    "build": "NODE_ENV=development ./node_modules/.bin/webpack --progress --profile --colors --display-error-details --config=./config/webpack.config.prod.js",
+    "archive": "cd public ; tar cvfz ../site.tar.gz *"
   },
   "repository": {
     "type": "git",
