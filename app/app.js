@@ -60,7 +60,9 @@ class App {
     var deltaMS = (!this._lastRenderTime) ? 1 : time - this._lastRenderTime;
     this._lastRenderTime = time;
 
-    if (!global.pauseAnimations)
+    // If delta is too large, that probably means the tab was suspended
+    // so skip this frame
+    if (!global.pauseAnimations && deltaMS < 90)
       this._storm.update(deltaMS / 1000);
 
     window.requestAnimationFrame(this._renderFunc);
