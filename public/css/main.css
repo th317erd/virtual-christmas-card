@@ -191,3 +191,23 @@ body #overlay span {
 body #overlay span:nth-child(1) {
   font-size: 60px;
 }
+
+@media (max-aspect-ratio: 120/110) {
+  body #background #backdrop {
+    top: 4vh;
+    background-size: cover;
+  }
+
+  body #form span {
+    margin-bottom: 100px;
+  }
+
+  body #form input {
+    padding: 32px 64px 32px 64px;
+    margin-bottom: 100px;
+  }
+
+  body #form button {
+    padding: 32px 100px 32px 100px;
+  }
+}
